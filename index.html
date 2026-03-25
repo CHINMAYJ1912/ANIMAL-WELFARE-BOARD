@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animal Welfare Board of Karnataka | AWBK</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+:root {
+  --forest: #1a3a2a;
+  --leaf: #2d6a4f;
+  --lime: #52b788;
+  --gold: #d4a017;
+  --amber: #f0b429;
+  --cream: #faf7f0;
+  --white: #ffffff;
+  --dark: #0e1f17;
+  --text: #2c3e2d;
+  --muted: #6b7c6e;
+  --border: #d8e8dc;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+
+/* ── TOP BAR ─────────────────────────── */
+.topbar{background:var(--forest);color:#cde9d8;font-size:.78rem;padding:6px 0;}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;}
+.topbar a{color:#cde9d8;text-decoration:none;margin-left:14px;}
+.topbar a:hover{color:var(--amber);}
+.topbar .left{display:flex;align-items:center;gap:16px;}
+
+/* ── NAV ──────────────────────────────── */
+nav{background:var(--white);box-shadow:0 2px 20px rgba(0,0,0,.08);position:sticky;top:0;z-index:1000;}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:76px;}
+.logo-area{display:flex;align-items:center;gap:14px;}
+.logo-emblem{width:54px;height:54px;background:linear-gradient(135deg,var(--leaf),var(--forest));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;}
+.logo-text h1{font-family:'Cormorant Garamond',serif;font-size:1.22rem;font-weight:700;color:var(--forest);line-height:1.15;}
+.logo-text p{font-size:.68rem;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;}
+.nav-links{display:flex;align-items:center;gap:2px;}
+.nav-links a{padding:8px 14px;font-size:.82rem;font-weight:500;color:var(--text);text-decoration:none;border-radius:6px;transition:.2s;}
+.nav-links a:hover,.nav-links a.active{background:var(--forest);color:var(--white);}
+.nav-donate{background:var(--gold)!important;color:var(--dark)!important;font-weight:600!important;padding:8px 20px!important;}
+.nav-donate:hover{background:var(--amber)!important;}
+.hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;}
+.hamburger span{width:24px;height:2px;background:var(--forest);border-radius:2px;}
+.mobile-menu{display:none;flex-direction:column;background:var(--white);border-top:2px solid var(--border);padding:12px 20px 20px;}
+.mobile-menu a{padding:10px 0;font-size:.9rem;color:var(--text);text-decoration:none;border-bottom:1px solid var(--border);}
+
+/* ── WRAP ─────────────────────────────── */
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px;}
+
+/* ── HERO ─────────────────────────────── */
+.hero{position:relative;height:580px;overflow:hidden;}
+.hero-slides{position:relative;width:100%;height:100%;}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;background-size:cover;background-position:center;}
+.hero-slide.active{opacity:1;}
+.hero-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(10,28,18,.75) 40%,rgba(10,28,18,.2));}
+.hero-content{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:center;padding:0 60px;max-width:640px;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(82,183,136,.2);border:1px solid rgba(82,183,136,.4);color:#a8d5bd;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:18px;}
+.hero-content h2{font-family:'Cormorant Garamond',serif;font-size:3rem;color:var(--white);line-height:1.2;font-weight:600;}
+.hero-content p{color:#c8ddd0;font-size:.95rem;margin-top:14px;line-height:1.65;}
+.hero-btns{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap;}
+.btn-primary{background:var(--lime);color:var(--dark);font-weight:600;padding:12px 28px;border-radius:8px;text-decoration:none;font-size:.88rem;transition:.2s;display:inline-flex;align-items:center;gap:8px;}
+.btn-primary:hover{background:var(--amber);}
+.btn-outline{border:1.5px solid rgba(255,255,255,.5);color:var(--white);font-weight:500;padding:11px 26px;border-radius:8px;text-decoration:none;font-size:.88rem;transition:.2s;}
+.btn-outline:hover{background:rgba(255,255,255,.1);}
+.hero-dots{position:absolute;bottom:22px;left:60px;z-index:3;display:flex;gap:8px;}
+.dot{width:8px;height:8px;border-radius:4px;background:rgba(255,255,255,.4);cursor:pointer;transition:.3s;}
+.dot.active{background:var(--lime);width:24px;}
+.hero-stats{position:absolute;bottom:0;right:0;z-index:3;background:rgba(255,255,255,.97);display:flex;gap:0;}
+.stat-box{padding:18px 28px;border-left:1px solid var(--border);text-align:center;}
+.stat-box:first-child{border-left:none;}
+.stat-box .num{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--forest);}
+.stat-box .lbl{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
+
+/* ── TICKER ────────────────────────────── */
+.ticker{background:var(--forest);color:#cde9d8;padding:10px 0;overflow:hidden;white-space:nowrap;}
+.ticker-inner{display:inline-block;animation:ticker 30s linear infinite;}
+.ticker-inner span{margin:0 40px;font-size:.8rem;}
+.ticker-inner i{color:var(--lime);margin-right:8px;}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── SECTION HEADER ──────────────────── */
+.sec-head{text-align:center;margin-bottom:50px;}
+.sec-tag{display:inline-block;background:rgba(45,106,79,.1);color:var(--leaf);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:5px 16px;border-radius:20px;margin-bottom:12px;}
+.sec-head h2{font-family:'Cormorant Garamond',serif;font-size:2.4rem;color:var(--forest);font-weight:600;}
+.sec-head p{color:var(--muted);max-width:540px;margin:10px auto 0;font-size:.9rem;line-height:1.65;}
+.divider{width:60px;height:3px;background:linear-gradient(90deg,var(--leaf),var(--lime));margin:14px auto 0;border-radius:2px;}
+
+/* ── NOTICES ─────────────────────────── */
+.notices{padding:60px 0;background:var(--white);}
+.notice-grid{display:grid;grid-template-columns:2fr 1fr;gap:30px;}
+.notice-panel{background:var(--cream);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.panel-head{background:var(--forest);color:var(--white);padding:14px 20px;font-size:.85rem;font-weight:600;letter-spacing:.04em;display:flex;align-items:center;justify-content:space-between;}
+.panel-head a{color:var(--lime);font-size:.75rem;text-decoration:none;}
+.notice-list{list-style:none;padding:0;}
+.notice-list li{padding:12px 18px;border-bottom:1px solid var(--border);font-size:.83rem;display:flex;gap:10px;align-items:flex-start;transition:.15s;}
+.notice-list li:hover{background:rgba(45,106,79,.04);}
+.notice-list li:last-child{border-bottom:none;}
+.notice-list .date{background:var(--leaf);color:var(--white);font-size:.68rem;padding:2px 8px;border-radius:4px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+.notice-list a{color:var(--forest);text-decoration:none;line-height:1.4;}
+.notice-list a:hover{color:var(--lime);}
+
+/* ── ABOUT ───────────────────────────── */
+.about{padding:80px 0;background:var(--cream);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.about-img-stack{position:relative;height:420px;}
+.about-img-stack img{border-radius:12px;object-fit:cover;}
+.img-main{position:absolute;top:0;left:0;width:75%;height:340px;box-shadow:0 20px 60px rgba(0,0,0,.15);}
+.img-small{position:absolute;bottom:0;right:0;width:55%;height:240px;border:4px solid var(--white);box-shadow:0 10px 30px rgba(0,0,0,.12);}
+.about-stamp{position:absolute;top:20px;right:0;background:var(--forest);color:var(--white);padding:14px 16px;border-radius:10px;text-align:center;font-size:.72rem;}
+.about-stamp .yr{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--lime);display:block;}
+.about-text .sec-tag{text-align:left;}
+.about-text h2{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--forest);font-weight:600;margin:10px 0;}
+.about-text p{color:var(--muted);font-size:.9rem;line-height:1.7;margin-bottom:16px;}
+.about-text ul{list-style:none;margin-bottom:20px;}
+.about-text ul li{display:flex;align-items:flex-start;gap:10px;font-size:.87rem;color:var(--text);margin-bottom:8px;}
+.about-text ul li i{color:var(--lime);margin-top:3px;flex-shrink:0;}
+.founder-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:16px;display:flex;align-items:center;gap:14px;margin-top:22px;}
+.founder-avatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--leaf),var(--forest));display:flex;align-items:center;justify-content:center;color:var(--white);font-size:1.3rem;flex-shrink:0;}
+.founder-info h4{font-size:.9rem;font-weight:600;color:var(--forest);}
+.founder-info p{font-size:.75rem;color:var(--muted);}
+
+/* ── HISTORY ─────────────────────────── */
+.history{padding:80px 0;background:var(--forest);}
+.history .sec-head h2{color:var(--white);}
+.history .sec-head p{color:#8bb89e;}
+.timeline{position:relative;max-width:900px;margin:0 auto;}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:rgba(82,183,136,.3);transform:translateX(-50%);}
+.tl-item{display:flex;margin-bottom:40px;position:relative;}
+.tl-item:nth-child(even){flex-direction:row-reverse;}
+.tl-dot{position:absolute;left:50%;top:20px;width:14px;height:14px;background:var(--lime);border-radius:50%;transform:translateX(-50%);border:2px solid var(--forest);}
+.tl-body{width:45%;padding:20px 22px;background:rgba(255,255,255,.06);border:1px solid rgba(82,183,136,.15);border-radius:10px;backdrop-filter:blur(4px);}
+.tl-item:nth-child(odd) .tl-body{margin-right:5%;}
+.tl-item:nth-child(even) .tl-body{margin-left:5%;}
+.tl-year{color:var(--lime);font-size:.78rem;font-weight:600;letter-spacing:.06em;}
+.tl-body h4{color:var(--white);font-size:.95rem;margin:4px 0 6px;}
+.tl-body p{color:#8bb89e;font-size:.8rem;line-height:1.55;}
+
+/* ── PROGRAMS ─────────────────────────── */
+.programs{padding:80px 0;background:var(--white);}
+.prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.prog-card{border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:.3s;background:var(--cream);}
+.prog-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.1);}
+.prog-img{height:180px;overflow:hidden;position:relative;}
+.prog-img img{width:100%;height:100%;object-fit:cover;transition:.4s;}
+.prog-card:hover .prog-img img{transform:scale(1.05);}
+.prog-img .badge{position:absolute;top:12px;left:12px;background:var(--forest);color:var(--white);font-size:.68rem;padding:3px 10px;border-radius:4px;}
+.prog-body{padding:18px;}
+.prog-body h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--forest);margin-bottom:7px;}
+.prog-body p{font-size:.8rem;color:var(--muted);line-height:1.55;}
+.prog-link{display:inline-flex;align-items:center;gap:5px;color:var(--leaf);font-size:.78rem;font-weight:600;margin-top:12px;text-decoration:none;}
+.prog-link:hover{color:var(--gold);}
+
+/* ── GALLERY ─────────────────────────── */
+.gallery{padding:80px 0;background:var(--cream);}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:10px;}
+.gallery-item{overflow:hidden;border-radius:8px;position:relative;}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:.5s;}
+.gallery-item:hover img{transform:scale(1.08);}
+.gallery-item.tall{grid-row:span 2;}
+.gallery-item.wide{grid-column:span 2;}
+.gallery-item::after{content:'';position:absolute;inset:0;background:rgba(26,58,42,0);transition:.3s;}
+.gallery-item:hover::after{background:rgba(26,58,42,.3);}
+
+/* ── DONATE ──────────────────────────── */
+.donate-sec{padding:80px 0;background:var(--forest);position:relative;overflow:hidden;}
+.donate-sec::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:rgba(82,183,136,.06);}
+.donate-sec::after{content:'';position:absolute;bottom:-80px;left:-80px;width:300px;height:300px;border-radius:50%;background:rgba(82,183,136,.05);}
+.donate-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1;}
+.donate-text h2{font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:var(--white);font-weight:600;margin-bottom:16px;}
+.donate-text p{color:#8bb89e;font-size:.9rem;line-height:1.7;margin-bottom:22px;}
+.donate-features{list-style:none;}
+.donate-features li{display:flex;align-items:center;gap:10px;color:#cde9d8;font-size:.85rem;margin-bottom:10px;}
+.donate-features i{color:var(--lime);}
+.donate-form-wrap{background:var(--white);border-radius:16px;padding:32px;}
+.donate-form-wrap h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--forest);margin-bottom:6px;}
+.donate-form-wrap p{color:var(--muted);font-size:.8rem;margin-bottom:20px;}
+.amount-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;}
+.amount-btn{border:2px solid var(--border);background:var(--cream);padding:10px;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;transition:.2s;color:var(--forest);}
+.amount-btn.active,.amount-btn:hover{border-color:var(--leaf);background:rgba(45,106,79,.08);color:var(--leaf);}
+.form-group{margin-bottom:14px;}
+.form-group label{display:block;font-size:.75rem;color:var(--muted);margin-bottom:5px;font-weight:500;}
+.form-group input,.form-group select{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:.85rem;font-family:inherit;color:var(--text);background:var(--white);outline:none;transition:.2s;}
+.form-group input:focus,.form-group select:focus{border-color:var(--leaf);}
+.donate-btn{width:100%;background:linear-gradient(135deg,var(--leaf),var(--lime));color:var(--white);border:none;padding:14px;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.donate-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(45,106,79,.4);}
+.secure-note{text-align:center;font-size:.72rem;color:var(--muted);margin-top:10px;display:flex;align-items:center;justify-content:center;gap:5px;}
+
+/* ── TEAM ─────────────────────────────── */
+.team{padding:80px 0;background:var(--white);}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+.team-card{background:var(--cream);border:1px solid var(--border);border-radius:12px;overflow:hidden;text-align:center;transition:.3s;}
+.team-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.09);}
+.team-img{height:170px;background:linear-gradient(135deg,#1a3a2a 0%,#2d6a4f 100%);display:flex;align-items:center;justify-content:center;font-size:3rem;color:rgba(255,255,255,.25);}
+.team-body{padding:16px;}
+.team-body h4{font-size:.92rem;font-weight:600;color:var(--forest);}
+.team-body .role{font-size:.74rem;color:var(--lime);margin:3px 0;}
+.team-body p{font-size:.75rem;color:var(--muted);line-height:1.5;}
+
+/* ── CONTACT ─────────────────────────── */
+.contact{padding:80px 0;background:var(--cream);}
+.contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:50px;}
+.contact-info h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--forest);margin-bottom:14px;}
+.contact-info p{color:var(--muted);font-size:.88rem;line-height:1.65;margin-bottom:24px;}
+.c-item{display:flex;gap:14px;margin-bottom:20px;align-items:flex-start;}
+.c-icon{width:42px;height:42px;background:rgba(45,106,79,.12);border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--leaf);font-size:.9rem;flex-shrink:0;}
+.c-detail h5{font-size:.82rem;font-weight:600;color:var(--forest);margin-bottom:2px;}
+.c-detail p{font-size:.8rem;color:var(--muted);}
+.c-detail a{color:var(--leaf);text-decoration:none;}
+.social-row{display:flex;gap:10px;margin-top:24px;}
+.soc-btn{width:38px;height:38px;border-radius:8px;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.9rem;text-decoration:none;transition:.2s;}
+.soc-btn:hover{background:var(--forest);color:var(--white);border-color:var(--forest);}
+.contact-form{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:32px;}
+.contact-form h3{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--forest);margin-bottom:20px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.contact-form .form-group input,.contact-form .form-group select,.contact-form .form-group textarea{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:.85rem;color:var(--text);background:var(--cream);outline:none;transition:.2s;}
+.contact-form .form-group textarea{height:110px;resize:vertical;}
+.contact-form .form-group input:focus,.contact-form .form-group select:focus,.contact-form .form-group textarea:focus{border-color:var(--leaf);}
+.submit-btn{background:var(--forest);color:var(--white);border:none;padding:13px 32px;border-radius:8px;font-size:.88rem;font-weight:600;cursor:pointer;transition:.2s;margin-top:6px;}
+.submit-btn:hover{background:var(--leaf);}
+
+/* ── FOOTER ──────────────────────────── */
+footer{background:var(--dark);color:#7a9a85;padding:60px 0 0;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.07);}
+.footer-about .f-logo{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.footer-about .f-logo-icon{width:44px;height:44px;background:linear-gradient(135deg,var(--leaf),var(--forest));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.footer-about .f-logo-text{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--white);font-weight:600;}
+.footer-about p{font-size:.8rem;line-height:1.65;margin-bottom:18px;}
+.footer-social{display:flex;gap:8px;}
+.footer-social a{width:34px;height:34px;border-radius:6px;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:#7a9a85;font-size:.8rem;text-decoration:none;transition:.2s;}
+.footer-social a:hover{background:var(--leaf);color:var(--white);border-color:var(--leaf);}
+.footer-col h4{color:var(--white);font-size:.88rem;font-weight:600;margin-bottom:16px;letter-spacing:.04em;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:9px;}
+.footer-col ul li a{color:#7a9a85;font-size:.8rem;text-decoration:none;transition:.2s;display:flex;align-items:center;gap:6px;}
+.footer-col ul li a:hover{color:var(--lime);}
+.footer-bottom{padding:18px 0;display:flex;justify-content:space-between;align-items:center;font-size:.75rem;flex-wrap:wrap;gap:10px;}
+.footer-bottom a{color:var(--lime);text-decoration:none;}
+
+/* ── BACK TO TOP ─────────────────────── */
+#btt{position:fixed;bottom:24px;right:24px;width:44px;height:44px;background:var(--leaf);color:var(--white);border:none;border-radius:50%;cursor:pointer;font-size:1rem;display:none;align-items:center;justify-content:center;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.2);transition:.2s;}
+#btt:hover{background:var(--forest);}
+#btt.show{display:flex;}
+
+/* ── TOAST ───────────────────────────── */
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--forest);color:var(--white);padding:12px 26px;border-radius:30px;font-size:.83rem;opacity:0;transition:.3s;z-index:9998;pointer-events:none;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ── MOBILE ──────────────────────────── */
+@media(max-width:992px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .notice-grid{grid-template-columns:1fr;}
+  .about-grid{grid-template-columns:1fr;}
+  .about-img-stack{height:260px;margin-bottom:20px;}
+  .prog-grid{grid-template-columns:repeat(2,1fr);}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  .donate-grid{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .team-grid{grid-template-columns:repeat(2,1fr);}
+  .hero-stats{position:relative;bottom:auto;right:auto;width:100%;}
+  .hero-content{padding:0 30px;max-width:100%;}
+  .hero-content h2{font-size:2rem;}
+  .tl-item,.tl-item:nth-child(even){flex-direction:column;}
+  .timeline::before{left:20px;}
+  .tl-dot{left:20px;}
+  .tl-body,.tl-item:nth-child(even) .tl-body{width:100%;margin:0 0 0 40px;}
+}
+@media(max-width:576px){
+  .prog-grid{grid-template-columns:1fr;}
+  .gallery-grid{grid-template-columns:1fr 1fr;}
+  .amount-grid{grid-template-columns:repeat(2,1fr);}
+  .form-row{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+  .hero-stats{display:none;}
+  .stat-box{padding:12px 16px;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="wrap">
+    <div class="left">
+      <span><i class="fas fa-phone"></i>&nbsp;+91-80-2222-4567</span>
+      <span><i class="fas fa-envelope"></i>&nbsp;admin@awbkarnataka.gov.in</span>
+    </div>
+    <div>
+      <a href="https://awbi.gov.in" target="_blank"><i class="fas fa-external-link-alt"></i> AWBI National</a>
+      <a href="#"><i class="fas fa-user"></i> Admin Login</a>
+      <a href="#"><i class="fas fa-globe"></i> ಕನ್ನಡ</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo-area">
+      <div class="logo-emblem">🦁</div>
+      <div class="logo-text">
+        <h1>Animal Welfare Board of Karnataka</h1>
+        <p>Government of Karnataka · Est. 1960 · ಕರ್ನಾಟಕ ಪ್ರಾಣಿ ಕಲ್ಯಾಣ ಮಂಡಳಿ</p>
+      </div>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="#home" class="active">Home</a>
+      <a href="#about">About</a>
+      <a href="#history">History</a>
+      <a href="#programs">Programs</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+      <a href="#donate" class="nav-donate"><i class="fas fa-heart"></i> Donate</a>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#history">History</a>
+    <a href="#programs">Programs</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#donate">Donate</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-slides">
+    <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=1400&auto=format')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=1400&auto=format')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1474558476522-1bc8b6bdb41a?w=1400&auto=format')"></div>
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?w=1400&auto=format')"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge"><i class="fas fa-leaf"></i> Official Government Body · Karnataka</div>
+    <h2>Protecting Every Life,<br>One Animal at a Time</h2>
+    <p>The Animal Welfare Board of Karnataka works tirelessly to prevent animal cruelty, ensure humane treatment, and promote compassionate coexistence between humans and animals across Karnataka.</p>
+    <div class="hero-btns">
+      <a href="#programs" class="btn-primary"><i class="fas fa-paw"></i> Our Programs</a>
+      <a href="#donate" class="btn-outline">Donate Now</a>
+    </div>
+  </div>
+  <div class="hero-dots">
+    <div class="dot active" onclick="goSlide(0)"></div>
+    <div class="dot" onclick="goSlide(1)"></div>
+    <div class="dot" onclick="goSlide(2)"></div>
+    <div class="dot" onclick="goSlide(3)"></div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-box"><div class="num">64<span style="font-size:1.2rem">+</span></div><div class="lbl">Years of Service</div></div>
+    <div class="stat-box"><div class="num">1.2L+</div><div class="lbl">Animals Protected</div></div>
+    <div class="stat-box"><div class="num">30</div><div class="lbl">Districts Covered</div></div>
+    <div class="stat-box"><div class="num">450+</div><div class="lbl">Registered Shelters</div></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner" id="ticker">
+    <span><i class="fas fa-circle-dot"></i> New anti-cruelty helpline launched: 1962</span>
+    <span><i class="fas fa-circle-dot"></i> Stray dog vaccination drive across 30 districts — March 2024</span>
+    <span><i class="fas fa-circle-dot"></i> AWBK Annual Report 2023-24 now available for download</span>
+    <span><i class="fas fa-circle-dot"></i> World Animal Day Celebration — October 4, 2024 at Palace Grounds, Bengaluru</span>
+    <span><i class="fas fa-circle-dot"></i> Online complaint portal upgraded — File complaints 24x7</span>
+    <span><i class="fas fa-circle-dot"></i> New mobile veterinary vans deployed in North Karnataka</span>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <span><i class="fas fa-circle-dot"></i> New anti-cruelty helpline launched: 1962</span>
+    <span><i class="fas fa-circle-dot"></i> Stray dog vaccination drive across 30 districts — March 2024</span>
+    <span><i class="fas fa-circle-dot"></i> AWBK Annual Report 2023-24 now available for download</span>
+    <span><i class="fas fa-circle-dot"></i> World Animal Day Celebration — October 4, 2024 at Palace Grounds, Bengaluru</span>
+    <span><i class="fas fa-circle-dot"></i> Online complaint portal upgraded — File complaints 24x7</span>
+    <span><i class="fas fa-circle-dot"></i> New mobile veterinary vans deployed in North Karnataka</span>
+  </div>
+</div>
+
+<!-- NOTICES -->
+<section class="notices">
+  <div class="wrap">
+    <div class="notice-grid">
+      <div class="notice-panel">
+        <div class="panel-head">📢 Latest Notices & Circulars <a href="#">View All →</a></div>
+        <ul class="notice-list">
+          <li><span class="date">Apr 2024</span><a href="#">Guidelines for Pet Shop Licensing under PCA Act — State-wide Implementation Order</a></li>
+          <li><span class="date">Mar 2024</span><a href="#">ABC (Animal Birth Control) Programme — Quarterly Review Meeting Minutes</a></li>
+          <li><span class="date">Mar 2024</span><a href="#">Registration of Animal Shelters & Gaushalas — Renewal Deadline: 31 May 2024</a></li>
+          <li><span class="date">Feb 2024</span><a href="#">Anti-Cruelty Enforcement Drive — Report on 2023-24 Convictions</a></li>
+          <li><span class="date">Feb 2024</span><a href="#">Transport of Animals Rules 2001 — Strict Compliance Advisory</a></li>
+          <li><span class="date">Jan 2024</span><a href="#">Mobile Veterinary Unit Schedule — January to March 2024</a></li>
+        </ul>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:24px;">
+        <div class="notice-panel">
+          <div class="panel-head">📅 Upcoming Events <a href="#">All Events →</a></div>
+          <ul class="notice-list">
+            <li><span class="date">Oct 4</span><a href="#">World Animal Day 2024 — Palace Grounds, Bengaluru</a></li>
+            <li><span class="date">Sep 20</span><a href="#">Mass Vaccination Drive — Mysuru District</a></li>
+            <li><span class="date">Sep 10</span><a href="#">School Awareness Programme — Tumkur</a></li>
+            <li><span class="date">Aug 26</span><a href="#">National Dog Day — Adoption Camp, Bengaluru</a></li>
+          </ul>
+        </div>
+        <div class="notice-panel">
+          <div class="panel-head">📞 Quick Help</div>
+          <ul class="notice-list">
+            <li><i class="fas fa-phone-alt" style="color:var(--lime)"></i>&nbsp;&nbsp;<a href="tel:1962">Animal Cruelty Helpline: <strong>1962</strong></a></li>
+            <li><i class="fas fa-ambulance" style="color:var(--lime)"></i>&nbsp;&nbsp;<a href="#">Emergency Rescue: +91-80-2222-4567</a></li>
+            <li><i class="fas fa-globe" style="color:var(--lime)"></i>&nbsp;&nbsp;<a href="#">Online Complaint Portal</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-img-stack">
+        <img class="img-main" src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=600&auto=format" alt="Animal Care">
+        <img class="img-small" src="https://images.unsplash.com/photo-1548767797-d8c844163c4c?w=400&auto=format" alt="Wildlife Protection">
+        <div class="about-stamp">
+          <span class="yr">1960</span>
+          <span>Year Founded</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="sec-tag">About AWBK</div>
+        <h2>Guardians of Animal Welfare in Karnataka</h2>
+        <p>The Animal Welfare Board of Karnataka (AWBK) is a statutory body constituted under the Prevention of Cruelty to Animals Act, 1960. It operates under the aegis of the Department of Animal Husbandry and Veterinary Sciences, Government of Karnataka.</p>
+        <p>Our mission is to advise the State Government on matters relating to animal welfare, enforce the Prevention of Cruelty to Animals Act, and promote humane treatment of all animals across Karnataka's 30 districts.</p>
+        <ul>
+          <li><i class="fas fa-check-circle"></i> Enforcement of the PCA Act, 1960 across Karnataka</li>
+          <li><i class="fas fa-check-circle"></i> Animal Birth Control (ABC) programme oversight</li>
+          <li><i class="fas fa-check-circle"></i> Licensing of pet shops, gaushalas & animal shelters</li>
+          <li><i class="fas fa-check-circle"></i> School & community awareness programmes statewide</li>
+          <li><i class="fas fa-check-circle"></i> Emergency rescue coordination with local bodies</li>
+        </ul>
+        <div class="founder-card">
+          <div class="founder-avatar"><i class="fas fa-user-tie"></i></div>
+          <div class="founder-info">
+            <h4>Shri Rukmini Devi Arundale</h4>
+            <p>Founder & First Chairperson — Animal Welfare Board of India, 1962 · Karnataka Chapter Pioneer</p>
+          </div>
+        </div>
+        <div class="founder-card" style="margin-top:12px;">
+          <div class="founder-avatar" style="background:linear-gradient(135deg,var(--gold),#a07010);"><i class="fas fa-id-badge"></i></div>
+          <div class="founder-info">
+            <h4>Chinmay — Domain Administrator</h4>
+            <p>Web & Digital Services, AWBK · Contact: 7624XXXX26 · admin@awbkarnataka.gov.in</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORY TIMELINE -->
+<section class="history" id="history">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag" style="background:rgba(82,183,136,.15);color:var(--lime);">Our Journey</div>
+      <h2>History of Animal Welfare in Karnataka</h2>
+      <p>From a nascent movement to a robust statutory body — six decades of compassion.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <div class="tl-year">1955</div>
+          <h4>The Rukmini Devi Movement</h4>
+          <p>Renowned Bharatanatyam dancer and animal rights champion Rukmini Devi Arundale begins advocacy at the national level, inspiring Karnataka's early animal welfare volunteers.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <div class="tl-year">1960</div>
+          <h4>PCA Act Enacted</h4>
+          <p>The Prevention of Cruelty to Animals Act, 1960 is passed by the Indian Parliament, providing the legal foundation for animal welfare bodies including Karnataka's chapter.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <div class="tl-year">1962</div>
+          <h4>AWBI Established — Karnataka Chapter Formed</h4>
+          <p>The Animal Welfare Board of India is constituted under Rukmini Devi Arundale's chairpersonship. Karnataka forms its own state chapter under the Department of Animal Husbandry.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <div class="tl-year">1975</div>
+          <h4>First Animal Shelter Network</h4>
+          <p>AWBK establishes the first network of government-recognised animal shelters across Bengaluru, Mysuru and Dharwad, housing and rehabilitating injured street animals.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <div class="tl-year">1995</div>
+          <h4>ABC Programme Launched</h4>
+          <p>Karnataka becomes one of the first states to implement a systematic Animal Birth Control programme in collaboration with municipalities to humanely manage stray dog populations.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <div class="tl-year">2008</div>
+          <h4>Wildlife Corridor Protection Initiative</h4>
+          <p>AWBK partners with the Forest Department to protect wildlife corridors across the Western Ghats, safeguarding elephants, leopards, and other fauna from human-wildlife conflict.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <div class="tl-year">2020</div>
+          <h4>Digital Transformation & Helpline 1962</h4>
+          <p>Launch of dedicated cruelty helpline 1962 and the online complaint portal, enabling 24×7 reporting of animal abuse across Karnataka. Mobile veterinary units deployed in 12 districts.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <div class="tl-year">2024</div>
+          <h4>Expanding Coverage & New Legislation</h4>
+          <p>AWBK now oversees 450+ registered shelters, 30 district offices, and advocates for stricter penalties under the proposed Prevention of Cruelty to Animals (Amendment) Bill.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="programs" id="programs">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">What We Do</div>
+      <h2>Our Key Programs</h2>
+      <p>Comprehensive initiatives covering rescue, rehabilitation, awareness, and legal enforcement.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="prog-grid">
+      <div class="prog-card">
+        <div class="prog-img">
+          <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=500&auto=format" alt="ABC Programme">
+          <span class="badge">Flagship</span>
+        </div>
+        <div class="prog-body">
+          <h3>Animal Birth Control (ABC)</h3>
+          <p>Systematic sterilisation and anti-rabies vaccination programme for stray dogs across all 30 districts in partnership with urban local bodies.</p>
+          <a href="#" class="prog-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-img">
+          <img src="https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8?w=500&auto=format" alt="Rescue Operations">
+          <span class="badge">Active</span>
+        </div>
+        <div class="prog-body">
+          <h3>Emergency Rescue Operations</h3>
+          <p>24×7 rescue coordination for injured, abused or stranded animals with a network of trained volunteers and mobile veterinary units across Karnataka.</p>
+          <a href="#" class="prog-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-img">
+          <img src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=500&auto=format" alt="Education">
+          <span class="badge">Awareness</span>
+        </div>
+        <div class="prog-body">
+          <h3>School Awareness Programme</h3>
+          <p>Compassion education in 2,000+ schools statewide, teaching students about animal rights, responsible pet ownership and coexistence with wildlife.</p>
+          <a href="#" class="prog-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-img">
+          <img src="https://images.unsplash.com/photo-1564466809058-bf4114d55352?w=500&auto=format" alt="Gaushala">
+        </div>
+        <div class="prog-body">
+          <h3>Gaushala & Shelter Oversight</h3>
+          <p>Registration, inspection and capacity-building support for 450+ registered gaushalas and animal shelters across Karnataka to maintain humane standards.</p>
+          <a href="#" class="prog-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-img">
+          <img src="https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=500&auto=format" alt="Wildlife">
+          <span class="badge">Wildlife</span>
+        </div>
+        <div class="prog-body">
+          <h3>Wildlife Welfare Initiative</h3>
+          <p>Collaboration with the Forest Department and WWF India to mitigate human-wildlife conflict in the Western Ghats and protect endangered species corridors.</p>
+          <a href="#" class="prog-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="prog-card">
+        <div class="prog-img">
+          <img src="https://images.unsplash.com/photo-1548767797-d8c844163c4c?w=500&auto=format" alt="Legislation">
+          <span class="badge">Legal</span>
+        </div>
+        <div class="prog-body">
+          <h3>Anti-Cruelty Enforcement</h3>
+          <p>Regular enforcement drives, FIR coordination and prosecution support under the PCA Act 1960, with 1962 helpline enabling round-the-clock complaint registration.</p>
+          <a href="#" class="prog-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">Our Animals</div>
+      <h2>Gallery of Life</h2>
+      <p>Every creature we protect — from street dogs to wild elephants — tells a story of hope.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item tall">
+        <img src="https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?w=400&auto=format" alt="Elephant">
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&auto=format" alt="Dog">
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1474511320723-9a56873867b5?w=400&auto=format" alt="Fox">
+      </div>
+      <div class="gallery-item tall">
+        <img src="https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=400&auto=format" alt="Penguin">
+      </div>
+      <div class="gallery-item wide">
+        <img src="https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8?w=800&auto=format" alt="Puppies">
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=400&auto=format" alt="Dog care">
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1462953491269-9aff00919695?w=400&auto=format" alt="Cat">
+      </div>
+      <div class="gallery-item wide">
+        <img src="https://images.unsplash.com/photo-1548767797-d8c844163c4c?w=800&auto=format" alt="Tigers">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DONATE -->
+<section class="donate-sec" id="donate">
+  <div class="wrap">
+    <div class="donate-grid">
+      <div class="donate-text">
+        <div class="sec-tag" style="background:rgba(82,183,136,.15);color:var(--lime);">Make a Difference</div>
+        <h2>Your Donation Saves Lives</h2>
+        <p>Every rupee donated to the Animal Welfare Board of Karnataka directly funds rescue operations, medical care, animal birth control programmes and community awareness drives across the state.</p>
+        <ul class="donate-features">
+          <li><i class="fas fa-syringe"></i> Fund veterinary care for injured strays</li>
+          <li><i class="fas fa-home"></i> Support animal shelter infrastructure</li>
+          <li><i class="fas fa-truck"></i> Enable mobile veterinary vans in rural areas</li>
+          <li><i class="fas fa-book"></i> Sponsor school compassion education kits</li>
+          <li><i class="fas fa-shield-alt"></i> Back anti-cruelty enforcement operations</li>
+        </ul>
+        <div style="margin-top:28px;background:rgba(255,255,255,.06);border:1px solid rgba(82,183,136,.2);border-radius:12px;padding:20px;">
+          <p style="color:#cde9d8;font-size:.85rem;margin-bottom:8px;"><strong style="color:var(--lime);">80G Tax Exemption Available</strong></p>
+          <p style="color:#8bb89e;font-size:.8rem;">Donations to AWBK qualify for tax deduction under Section 80G of the Income Tax Act. Certificate issued within 7 working days.</p>
+        </div>
+      </div>
+      <div class="donate-form-wrap">
+        <h3>Donate to Animal Welfare</h3>
+        <p>Secure online donation · All major payment methods accepted</p>
+        <div class="amount-grid">
+          <button class="amount-btn" onclick="setAmount(500)">₹500</button>
+          <button class="amount-btn active" onclick="setAmount(1000)">₹1,000</button>
+          <button class="amount-btn" onclick="setAmount(2500)">₹2,500</button>
+          <button class="amount-btn" onclick="setAmount(5000)">₹5,000</button>
+          <button class="amount-btn" onclick="setAmount(10000)">₹10,000</button>
+          <button class="amount-btn" onclick="setAmount('custom')">Custom</button>
+        </div>
+        <div class="form-group">
+          <label>Donation Amount (₹)</label>
+          <input type="number" id="donateAmt" value="1000" placeholder="Enter amount">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" placeholder="Your full name">
+          </div>
+          <div class="form-group">
+            <label>Mobile Number</label>
+            <input type="tel" placeholder="+91 XXXXXXXXXX">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>Donate Towards</label>
+          <select>
+            <option>General Animal Welfare Fund</option>
+            <option>Emergency Rescue Operations</option>
+            <option>Animal Birth Control Programme</option>
+            <option>Gaushala Support Fund</option>
+            <option>School Awareness Programme</option>
+            <option>Wildlife Protection Initiative</option>
+          </select>
+        </div>
+        <button class="donate-btn" onclick="processDonation()">
+          <i class="fas fa-heart"></i> Proceed to Donate
+        </button>
+        <div class="secure-note"><i class="fas fa-lock"></i> 256-bit SSL Secured · Government Portal</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">Leadership</div>
+      <h2>Our Board Members</h2>
+      <p>Distinguished members guiding Karnataka's animal welfare mission.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-img">🏛️</div>
+        <div class="team-body">
+          <h4>Shri K. Govindraj</h4>
+          <div class="role">Chairman, AWBK</div>
+          <p>IAS Officer, Dept. of Animal Husbandry & Veterinary Sciences, GoK</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-img">⚖️</div>
+        <div class="team-body">
+          <h4>Dr. Meena Subramaniam</h4>
+          <div class="role">Member Secretary</div>
+          <p>Senior Veterinary Officer, 20+ years in animal welfare legislation</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-img">🩺</div>
+        <div class="team-body">
+          <h4>Dr. Rajesh Nair</h4>
+          <div class="role">Chief Veterinary Advisor</div>
+          <p>BVSc, MVSc — Wildlife & Exotic Animal Medicine Specialist</p>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-img" style="font-size:2rem;">💻</div>
+        <div class="team-body">
+          <h4>Chinmay</h4>
+          <div class="role">Domain Administrator</div>
+          <p>Digital Services & Web Administration · Contact: 7624XXXX26</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-tag">Get In Touch</div>
+      <h2>Contact Us</h2>
+      <p>Report animal cruelty, request information or reach our domain administrator.</p>
+      <div class="divider"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Animal Welfare Board of Karnataka</h3>
+        <p>Reach out to report cruelty, seek licensing guidance, or connect with our team. We respond to all enquiries within 2 working days.</p>
+        <div class="c-item">
+          <div class="c-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div class="c-detail">
+            <h5>Headquarters</h5>
+            <p>Room No. 212, Kruthi Building, Sampangi Rama Nagar,<br>Bengaluru – 560027, Karnataka</p>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon"><i class="fas fa-phone"></i></div>
+          <div class="c-detail">
+            <h5>Cruelty Helpline (24×7)</h5>
+            <p><a href="tel:1962"><strong>1962</strong></a> (Toll Free) · +91-80-2222-4567</p>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon"><i class="fas fa-user-cog"></i></div>
+          <div class="c-detail">
+            <h5>Domain Administrator — Chinmay</h5>
+            <p>📱 <a href="tel:7624000026">7624XXXX26</a><br>📧 <a href="mailto:admin@awbkarnataka.gov.in">admin@awbkarnataka.gov.in</a></p>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon"><i class="fas fa-clock"></i></div>
+          <div class="c-detail">
+            <h5>Office Hours</h5>
+            <p>Monday – Friday: 9:30 AM – 5:30 PM<br>Cruelty Helpline: 24×7</p>
+          </div>
+        </div>
+        <h5 style="font-size:.82rem;color:var(--forest);margin-bottom:10px;">Follow Animal Welfare Board</h5>
+        <div class="social-row">
+          <a href="https://www.facebook.com/AWBIOfficial" target="_blank" class="soc-btn" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://twitter.com/AWBIOfficial" target="_blank" class="soc-btn" title="Twitter/X"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://www.instagram.com/awbi_official/" target="_blank" class="soc-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@AWBIOfficial" target="_blank" class="soc-btn" title="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.linkedin.com/company/animal-welfare-board-of-india" target="_blank" class="soc-btn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://awbi.gov.in" target="_blank" class="soc-btn" title="AWBI National"><i class="fas fa-globe"></i></a>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h3>Send Us a Message</h3>
+        <div class="form-row">
+          <div class="form-group"><label>Full Name *</label><input type="text" placeholder="Your name"></div>
+          <div class="form-group"><label>Mobile *</label><input type="tel" placeholder="+91 XXXXXXXXXX"></div>
+        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="your@email.com"></div>
+        <div class="form-group">
+          <label>Subject</label>
+          <select>
+            <option>Report Animal Cruelty</option>
+            <option>Shelter/Gaushala Registration</option>
+            <option>Pet Shop Licensing</option>
+            <option>ABC Programme Enquiry</option>
+            <option>Adoption Enquiry</option>
+            <option>Donation / CSR</option>
+            <option>Media / Press</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Your Message *</label><textarea placeholder="Describe your complaint or enquiry in detail…"></textarea></div>
+        <button class="submit-btn" onclick="submitContact()"><i class="fas fa-paper-plane"></i>&nbsp; Submit Enquiry</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <div class="f-logo">
+          <div class="f-logo-icon">🦁</div>
+          <div class="f-logo-text">Animal Welfare Board<br>of Karnataka</div>
+        </div>
+        <p>A statutory body under the Prevention of Cruelty to Animals Act, 1960. Committed to the welfare, protection and compassionate treatment of every living being in Karnataka.</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com/AWBIOfficial" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://twitter.com/AWBIOfficial" target="_blank"><i class="fab fa-x-twitter"></i></a>
+          <a href="https://www.instagram.com/awbi_official/" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.youtube.com/@AWBIOfficial" target="_blank"><i class="fab fa-youtube"></i></a>
+          <a href="https://awbi.gov.in" target="_blank"><i class="fas fa-globe"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#about"><i class="fas fa-chevron-right"></i> About AWBK</a></li>
+          <li><a href="#history"><i class="fas fa-chevron-right"></i> Our History</a></li>
+          <li><a href="#programs"><i class="fas fa-chevron-right"></i> Programs</a></li>
+          <li><a href="#donate"><i class="fas fa-chevron-right"></i> Donate</a></li>
+          <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+          <li><a href="https://awbi.gov.in" target="_blank"><i class="fas fa-chevron-right"></i> AWBI National</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Acts & Guidelines</h4>
+        <ul>
+          <li><a href="#"><i class="fas fa-file-pdf"></i> PCA Act, 1960</a></li>
+          <li><a href="#"><i class="fas fa-file-pdf"></i> ABC Rules, 2001</a></li>
+          <li><a href="#"><i class="fas fa-file-pdf"></i> Transport of Animals Rules</a></li>
+          <li><a href="#"><i class="fas fa-file-pdf"></i> Performing Animals Rules</a></li>
+          <li><a href="#"><i class="fas fa-file-pdf"></i> Pet Shop Guidelines 2018</a></li>
+          <li><a href="#"><i class="fas fa-file-pdf"></i> Annual Reports</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:1962"><i class="fas fa-phone"></i> Helpline: 1962</a></li>
+          <li><a href="tel:+918022224567"><i class="fas fa-phone"></i> +91-80-2222-4567</a></li>
+          <li><a href="mailto:admin@awbkarnataka.gov.in"><i class="fas fa-envelope"></i> admin@awbkarnataka.gov.in</a></li>
+          <li><a href="#"><i class="fas fa-map-marker-alt"></i> Sampangi Rama Nagar, Bengaluru</a></li>
+          <li><a href="#"><i class="fas fa-user-cog"></i> Admin: Chinmay · 7624XXXX26</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 Animal Welfare Board of Karnataka · Government of Karnataka · All Rights Reserved</span>
+      <span>Designed & Maintained by <a href="#">Chinmay</a> · <a href="https://awbi.gov.in" target="_blank">AWBI National →</a></span>
+    </div>
+  </div>
+</footer>
+
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up"></i></button>
+<div class="toast" id="toast"></div>
+
+<script>
+// SLIDER
+let cur=0,total=4;
+const slides=document.querySelectorAll('.hero-slide'),dots=document.querySelectorAll('.dot');
+function goSlide(n){slides[cur].classList.remove('active');dots[cur].classList.remove('active');cur=n;slides[cur].classList.add('active');dots[cur].classList.add('active');}
+setInterval(()=>goSlide((cur+1)%total),5000);
+
+// NAV ACTIVE
+const navAs=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  document.getElementById('btt').classList.toggle('show',window.scrollY>300);
+  let pos=window.scrollY+120;
+  document.querySelectorAll('section[id]').forEach(s=>{
+    if(pos>=s.offsetTop && pos<s.offsetTop+s.offsetHeight){
+      navAs.forEach(a=>a.classList.remove('active'));
+      let t=document.querySelector('.nav-links a[href="#'+s.id+'"]');
+      if(t)t.classList.add('active');
+    }
+  });
+});
+
+// MOBILE MENU
+function toggleMenu(){document.getElementById('mobileMenu').style.display=document.getElementById('mobileMenu').style.display==='flex'?'none':'flex';}
+document.getElementById('mobileMenu').querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>document.getElementById('mobileMenu').style.display='none'));
+
+// AMOUNT BUTTONS
+function setAmount(v){
+  document.querySelectorAll('.amount-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  if(v!=='custom')document.getElementById('donateAmt').value=v;
+  else{document.getElementById('donateAmt').value='';document.getElementById('donateAmt').focus();}
+}
+
+// TOAST
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3200);}
+function processDonation(){showToast('✅ Redirecting to secure payment gateway…');}
+function submitContact(){showToast('✅ Your message has been submitted. We will respond within 2 working days.');}
+</script>
+</body>
+</html>
+<footer>
+  <p>Follow us:</p>
+  <a href="#">Instagram</a>
+  <a href="#">Facebook</a>
+</footer>
